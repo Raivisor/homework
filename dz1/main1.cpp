@@ -1,54 +1,24 @@
 #include <iostream>
 #include <vector>
-#include <random>
 #include <chrono>
 #include <algorithm>
+#include "show_array.hpp"
+#include "generator.hpp"
+#include "shellSorting.hpp"
 
 using namespace std;
 using namespace chrono;
 
-using ll = long long;
+void biv::show::showArray(vector<int>& a);
 
-void showArray(vector<ll>& a){
-    for(ll c : a){
-        cout << c << " ";
-    }
-    cout << "\n";
-}
-
-vector<ll> generate(int N){
-    vector<ll> a;
-    mt19937 mt(time(nullptr));
-    for(;N-- > 0;){
-        int p = (mt()%10); int q = (mt()%10);
-        a.push_back(pow(2,p)*pow(3,q));
-    }
-    return a;
-}
-
-void shellSorting(vector<ll>& a, int N){
-    int h = 1;
-    while(3*h + 1 <= (N + 2)/3){
-        h = 3*h + 1;
-    }
-    for(; h > 0; h /= 3){
-        for(int i = h; i < N; i++){
-            int temp = a[i];
-            int j = i;
-            for(; j >= h && a[j-h] > temp;j -= h){
-                a[j] = a[j-h];
-            }
-            a[j] = temp;
-        }
-    }
-}
+void biv::sorting::shellSorting(vector<int>& a, int N);
 
 void solve(int N){
-    vector<ll> a = generate(N);
-    vector<ll> b = a;
-    //showArray(a);
+    vector<int> a = biv::generator::generate(N);
+    vector<int> b = a;
+    biv::show::showArray(a);
     auto start1 = steady_clock::now();
-    shellSorting(a, N);
+    biv::sorting::shellSorting(a, N);
     auto stop1 = steady_clock::now();
     auto duration1 = duration_cast<microseconds>(stop1-start1);
     auto start2 = steady_clock::now();
