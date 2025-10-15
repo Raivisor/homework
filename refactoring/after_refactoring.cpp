@@ -14,6 +14,9 @@ int main()
     find_average("вторая последовательность", "среднее второй последовательности = ", array_b, size);
     find_average("третья последовательность", "среднее третьей последовательности = ", array_c, size);
 
+    delete[] array_a;
+    delete[] array_b;
+    delete[] array_c;
     return 0;
 }
 
