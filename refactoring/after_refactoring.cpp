@@ -1,30 +1,44 @@
 ﻿#include <iostream>
 #include <cmath>
 
-void find_average(const char* const comment_begin, const char* const comment_end, float* array, int size);
+void find_average(
+    const char* const comment_begin, 
+    const char* const comment_end, 
+    int* array, 
+    const int size, 
+    const int number
+);
 
 int main()
 {
-    int size = 10;
-    float* array_a = new float[size];
-    float* array_b = new float[size];
-    float* array_c = new float[size];
+    const int size = 10;
+    const int count = 3;
 
-    find_average("первая последовательность", "среднее первой последовательности = ", array_a, size);
-    find_average("вторая последовательность", "среднее второй последовательности = ", array_b, size);
-    find_average("третья последовательность", "среднее третьей последовательности = ", array_c, size);
+    for (int i = 0; i < count; i++){
+        int array[size];
+        find_average(
+            "последовательность номер ", 
+            "среднее последовательности = ", 
+            array, 
+            size, 
+            i
+        );
+    }
 
-    delete[] array_a;
-    delete[] array_b;
-    delete[] array_c;
     return 0;
 }
 
-void find_average(const char* const comment_begin, const char* const comment_end, float* array, int size){
+void find_average(
+    const char* const comment_begin, 
+    const char* const comment_end, 
+    int* array, 
+    const int size,  
+    const int number
+) {
     const char space = ' ';
     float sum = 0;
 
-    std::cout << comment_begin << std::endl;
+    std::cout << comment_begin << number + 1 << std::endl;
 
     for (int i = 0; i < size; i++)
     {
@@ -35,7 +49,7 @@ void find_average(const char* const comment_begin, const char* const comment_end
     }
     std::cout << std::endl;
 
-    float average = sum/size;
+    float average = sum / size;
 
     std::cout << comment_end << average << std::endl;
 }
